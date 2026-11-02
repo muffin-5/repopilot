@@ -1,0 +1,80 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+.venv/
+env/
+backend/venv/
+backend/.venv/
+
+# Environment variables & secrets (CRITICAL: never commit live keys)
+.env
+.env.*
+*.env
+*.env.local
+backend/.env
+backend/.env.*
+!.env.example
+!backend/.env.example
+
+# IDE & OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Node & Frontend build
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+build/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python distribution
+*.egg-info/
+*.egg
+.eggs/
+*.whl
+
+# Testing & Coverage
+.pytest_cache/
+backend/.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Docker overrides
+docker-compose.override.yml
+
+# Ingested repos & runtime vector data
+data/
+backend/data/
+backend/data/repos/
+backend/data/repos_metadata.json
+backend/data/eval_results/*.json
+repos/
+*.db
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Evaluation runs (keep benchmark definitions and keep sample output structure)
+evaluation/results/*.json
+!evaluation/results/.gitkeep
+
+# Temporary
+tmp/
+temp/

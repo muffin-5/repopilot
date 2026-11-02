@@ -1,0 +1,175 @@
+{
+  "benchmark_name": "repopilot_sample_benchmark_v1",
+  "description": "Sample evaluation benchmark for testing RepoPilot retrieval and answer quality on a generic Python web application repository.",
+  "repository": "sample-python-webapp",
+  "questions": [
+    {
+      "id": "arch_001",
+      "question": "What design pattern is used for handling HTTP requests in this project?",
+      "expected_files": ["app/main.py", "app/routes.py", "app/views.py"],
+      "expected_answer_contains": ["route", "handler", "endpoint"],
+      "category": "architecture",
+      "difficulty": "easy"
+    },
+    {
+      "id": "arch_002",
+      "question": "How is the project structured? Describe the main modules and their responsibilities.",
+      "expected_files": ["app/__init__.py", "app/main.py", "README.md"],
+      "expected_answer_contains": ["module", "structure", "directory"],
+      "category": "architecture",
+      "difficulty": "medium"
+    },
+    {
+      "id": "arch_003",
+      "question": "What middleware is used in this application and what does each piece do?",
+      "expected_files": ["app/middleware.py", "app/main.py"],
+      "expected_answer_contains": ["middleware"],
+      "category": "architecture",
+      "difficulty": "medium"
+    },
+    {
+      "id": "func_001",
+      "question": "Where is the user authentication function defined?",
+      "expected_files": ["app/auth.py", "app/services/auth_service.py"],
+      "expected_answer_contains": ["authenticate", "login", "auth"],
+      "category": "function_location",
+      "difficulty": "easy"
+    },
+    {
+      "id": "func_002",
+      "question": "Where is the database connection pool initialized?",
+      "expected_files": ["app/database.py", "app/db.py", "app/core/database.py"],
+      "expected_answer_contains": ["connection", "pool", "database"],
+      "category": "function_location",
+      "difficulty": "easy"
+    },
+    {
+      "id": "func_003",
+      "question": "Which function handles password hashing and where is it located?",
+      "expected_files": ["app/auth.py", "app/utils/security.py", "app/services/auth_service.py"],
+      "expected_answer_contains": ["hash", "password", "bcrypt"],
+      "category": "function_location",
+      "difficulty": "easy"
+    },
+    {
+      "id": "func_004",
+      "question": "Where is the email sending functionality implemented?",
+      "expected_files": ["app/services/email_service.py", "app/utils/email.py"],
+      "expected_answer_contains": ["email", "send", "smtp"],
+      "category": "function_location",
+      "difficulty": "easy"
+    },
+    {
+      "id": "dep_001",
+      "question": "What does the user service module import and depend on?",
+      "expected_files": ["app/services/user_service.py"],
+      "expected_answer_contains": ["import", "database", "model"],
+      "category": "dependency",
+      "difficulty": "medium"
+    },
+    {
+      "id": "dep_002",
+      "question": "What external libraries does this project use for API validation?",
+      "expected_files": ["requirements.txt", "pyproject.toml", "setup.py"],
+      "expected_answer_contains": ["pydantic", "marshmallow", "validation"],
+      "category": "dependency",
+      "difficulty": "easy"
+    },
+    {
+      "id": "dep_003",
+      "question": "Which modules import the configuration settings?",
+      "expected_files": ["app/core/config.py", "app/config.py"],
+      "expected_answer_contains": ["config", "settings", "import"],
+      "category": "dependency",
+      "difficulty": "medium"
+    },
+    {
+      "id": "test_001",
+      "question": "What tests exist for the authentication module?",
+      "expected_files": ["tests/test_auth.py", "tests/test_authentication.py"],
+      "expected_answer_contains": ["test", "auth", "login"],
+      "category": "test",
+      "difficulty": "easy"
+    },
+    {
+      "id": "test_002",
+      "question": "How are the API endpoints tested? Describe the testing approach.",
+      "expected_files": ["tests/test_api.py", "tests/test_routes.py", "tests/conftest.py"],
+      "expected_answer_contains": ["test", "client", "endpoint"],
+      "category": "test",
+      "difficulty": "medium"
+    },
+    {
+      "id": "test_003",
+      "question": "What test fixtures are defined in the project?",
+      "expected_files": ["tests/conftest.py"],
+      "expected_answer_contains": ["fixture", "conftest", "setup"],
+      "category": "test",
+      "difficulty": "medium"
+    },
+    {
+      "id": "multi_001",
+      "question": "Trace the flow of a user registration request from the API endpoint to the database.",
+      "expected_files": ["app/routes.py", "app/services/user_service.py", "app/models/user.py", "app/database.py"],
+      "expected_answer_contains": ["route", "service", "model", "database"],
+      "category": "multi_file",
+      "difficulty": "hard"
+    },
+    {
+      "id": "multi_002",
+      "question": "How does error handling work across the application? Trace from middleware to response.",
+      "expected_files": ["app/middleware.py", "app/exceptions.py", "app/utils/errors.py"],
+      "expected_answer_contains": ["error", "exception", "handler"],
+      "category": "multi_file",
+      "difficulty": "hard"
+    },
+    {
+      "id": "multi_003",
+      "question": "Explain the data flow for creating a new blog post, from request to database storage.",
+      "expected_files": ["app/routes.py", "app/services/post_service.py", "app/models/post.py"],
+      "expected_answer_contains": ["post", "create", "save"],
+      "category": "multi_file",
+      "difficulty": "hard"
+    },
+    {
+      "id": "unanswerable_001",
+      "question": "How does the GraphQL API handle subscriptions in this project?",
+      "expected_files": [],
+      "expected_answer_contains": ["cannot", "not found", "does not"],
+      "category": "unanswerable",
+      "difficulty": "easy"
+    },
+    {
+      "id": "unanswerable_002",
+      "question": "What Kubernetes deployment configuration is used for this project?",
+      "expected_files": [],
+      "expected_answer_contains": ["cannot", "not found", "does not", "no evidence"],
+      "category": "unanswerable",
+      "difficulty": "easy"
+    },
+    {
+      "id": "unanswerable_003",
+      "question": "How does the machine learning model training pipeline work in this codebase?",
+      "expected_files": [],
+      "expected_answer_contains": ["cannot", "not found", "does not", "no evidence"],
+      "category": "unanswerable",
+      "difficulty": "easy"
+    },
+    {
+      "id": "unanswerable_004",
+      "question": "What WebSocket implementation does this project use for real-time features?",
+      "expected_files": [],
+      "expected_answer_contains": ["cannot", "not found", "does not", "no evidence"],
+      "category": "unanswerable",
+      "difficulty": "easy"
+    }
+  ],
+  "categories": {
+    "architecture": "Questions about overall project structure and design patterns",
+    "function_location": "Questions about where specific functions or features are implemented",
+    "dependency": "Questions about module dependencies and imports",
+    "test": "Questions about testing approach and test locations",
+    "multi_file": "Questions requiring understanding across multiple files",
+    "unanswerable": "Questions about features that do not exist in the repository"
+  }
+}
