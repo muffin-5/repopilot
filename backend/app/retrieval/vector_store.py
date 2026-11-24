@@ -201,12 +201,24 @@ class VectorStore:
             return store.search(query_vector, top_k)
 
         try:
-            results = self._client.search(
-                collection_name=collection,
-                query_vector=query_vector.tolist(),
-                limit=top_k,
-                with_payload=True,
-            )
+            # Qdrant 1.10+ replaced ``search`` with ``query_points``. Keep
+            # the older call as a fallback so the project also works with the
+            # minimum supported qdrant-client version.
+            if hasattr(self._client, "query_points"):
+                response = self._client.query_points(
+                    collection_name=collection,
+                    query=query_vector.tolist(),
+                    limit=top_k,
+                    with_payload=True,
+                )
+                results = response.points
+            else:
+                results = self._client.search(
+                    collection_name=collection,
+                    query_vector=query_vector.tolist(),
+                    limit=top_k,
+                    with_payload=True,
+                )
             return [
                 VectorSearchResult(
                     chunk_id=str(r.id),
