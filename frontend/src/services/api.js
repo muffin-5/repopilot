@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // In production Nginx proxies /api to the backend. A relative path keeps the
-  // browser on the same public host instead of trying to call the visitor's localhost.
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  // API calls below already begin with /api. Keeping the default empty preserves
+  // that prefix while using the same public host in production.
+  baseURL: import.meta.env.VITE_API_BASE_URL || '',
   headers: {
     'Content-Type': 'application/json',
   },
