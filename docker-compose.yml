@@ -13,6 +13,7 @@ services:
       - LLM_BASE_URL=${LLM_BASE_URL:-https://api.openai.com/v1}
       - EMBEDDING_MODEL=${EMBEDDING_MODEL:-all-MiniLM-L6-v2}
       - QDRANT_URL=http://qdrant:6333
+      - QDRANT_API_KEY=
       - QDRANT_COLLECTION=${QDRANT_COLLECTION:-repopilot}
       - TOP_K=${TOP_K:-10}
       - BM25_WEIGHT=${BM25_WEIGHT:-0.4}
@@ -26,7 +27,7 @@ services:
         condition: service_started
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
       timeout: 10s
       retries: 3

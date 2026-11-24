@@ -19,6 +19,7 @@ backend/.venv/
 backend/.env
 backend/.env.*
 !.env.example
+!.env.aws.example
 !backend/.env.example
 
 # IDE & OS files

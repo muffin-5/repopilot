@@ -34,6 +34,7 @@ class VectorStore:
         url: str = "http://localhost:6333",
         collection: str = "repopilot_chunks",
         qdrant_url: Optional[str] = None,
+        qdrant_api_key: Optional[str] = None,
         collection_name: Optional[str] = None,
     ) -> None:
         """
@@ -42,6 +43,7 @@ class VectorStore:
             collection: Default collection name.
         """
         self.url = qdrant_url or url
+        self.api_key = qdrant_api_key
         self.collection = collection_name or collection
         self._client = None
         self._use_inmemory = False
@@ -53,7 +55,11 @@ class VectorStore:
         try:
             from qdrant_client import QdrantClient  # type: ignore
 
-            self._client = QdrantClient(url=self.url, timeout=5)
+            self._client = QdrantClient(
+                url=self.url,
+                api_key=self.api_key or None,
+                timeout=10,
+            )
             # quick health check
             self._client.get_collections()
             logger.info("qdrant_connected", url=self.url)

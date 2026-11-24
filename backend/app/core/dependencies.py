@@ -56,6 +56,7 @@ def get_vector_store() -> VectorStore:
         settings = get_app_settings()
         _vector_store = VectorStore(
             qdrant_url=settings.qdrant_url,
+            qdrant_api_key=settings.qdrant_api_key,
             collection_name=settings.qdrant_collection,
         )
     return _vector_store

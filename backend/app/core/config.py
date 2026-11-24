@@ -36,6 +36,7 @@ class Settings(BaseSettings):
 
     # ── Qdrant ─────────────────────────────────────────────────────────
     QDRANT_URL: str = "http://localhost:6333"
+    QDRANT_API_KEY: str = ""
     QDRANT_COLLECTION: str = "repopilot_chunks"
 
     # ── Chunking ───────────────────────────────────────────────────────
@@ -101,6 +102,10 @@ class Settings(BaseSettings):
     @property
     def qdrant_url(self) -> str:
         return self.QDRANT_URL
+
+    @property
+    def qdrant_api_key(self) -> str:
+        return self.QDRANT_API_KEY
 
     @property
     def qdrant_collection(self) -> str:
