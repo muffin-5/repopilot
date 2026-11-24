@@ -63,6 +63,14 @@ curl http://localhost/health
 
 Open `http://YOUR_EC2_PUBLIC_IP` in a browser. On first use, submit a small public repository to index. The first request can take longer because the embedding model is downloaded into the backend container.
 
+If you previously started a build before the CPU-only configuration was pulled, stop it with `Ctrl+C`, pull the latest changes, and clear only the unused Docker build cache before rebuilding:
+
+```bash
+git pull
+docker builder prune -af
+docker compose -f docker-compose.aws.yml up -d --build
+```
+
 ## 5. Useful operations
 
 ```bash

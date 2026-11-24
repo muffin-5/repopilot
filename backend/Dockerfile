@@ -4,7 +4,13 @@ FROM python:3.11-slim as builder
 WORKDIR /build
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+# RepoPilot runs inference on CPU in the EC2 demo. Resolve the CPU-only PyTorch
+# wheel and project requirements in one pip operation; otherwise pip can select
+# multi-gigabyte NVIDIA/CUDA dependencies while resolving sentence-transformers.
+RUN pip install --no-cache-dir --prefix=/install \
+      --extra-index-url https://download.pytorch.org/whl/cpu \
+      torch==2.5.1+cpu \
+      -r requirements.txt
 
 # Runtime stage
 FROM python:3.11-slim
