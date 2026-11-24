@@ -150,7 +150,11 @@ class VectorStore:
                     vector=vec.tolist(),
                     payload=payload,
                 )
-                for id_, vec, payload in zip(ids, vectors, payloads)
+                # `ids` may be a list of chunk dictionaries when callers use
+                # the convenient three-argument form. Always use the
+                # normalised values built above; otherwise `payloads` is None
+                # and Qdrant ingestion raises "NoneType is not iterable".
+                for id_, vec, payload in zip(chunk_ids, vectors, chunk_payloads)
             ]
 
             batch_size = 100
@@ -160,8 +164,8 @@ class VectorStore:
                     points=points[i: i + batch_size],
                 )
 
-            logger.info("vectors_added", collection=collection, count=len(ids))
-            return len(ids)
+            logger.info("vectors_added", collection=collection, count=len(chunk_ids))
+            return len(chunk_ids)
         except Exception as exc:
             logger.error("qdrant_add_failed_falling_back", error=str(exc))
             self._use_inmemory = True
@@ -169,8 +173,8 @@ class VectorStore:
             if store is None:
                 store = _InMemoryCollection(dimension=vectors.shape[1])
                 self._inmemory_stores[collection] = store
-            store.add(ids, vectors, payloads)
-            return len(ids)
+            store.add(chunk_ids, vectors, chunk_payloads)
+            return len(chunk_ids)
 
     # ── search ─────────────────────────────────────────────────────────
 
